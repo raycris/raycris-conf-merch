@@ -2,7 +2,7 @@ const path = require("path");
 // const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -15,8 +15,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      "@styles": path.resolve(__dirname, "src/styles/"),
-      "@components": path.resolve(__dirname, "src/components/"),
+      "@styles": path.resolve(__dirname, "src/styles/components"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
   },
   mode: "production",
@@ -33,10 +33,15 @@ module.exports = {
         test: /\.html$/,
         use: [{ loader: "html-loader" }],
       },
-      // {
-      //   test: /\.s[ac]ss$/,
-      //   use: ["style-loader", "css-loader", "sass-loader"],
-      // },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          "css-loader",
+        ],
+      },
     ],
   },
   plugins: [
@@ -44,16 +49,22 @@ module.exports = {
       template: "./public/index.html",
       filename: "./index.html",
     }),
-    // new MiniCssExtractPlugin({
-    //   filename: "[name].css",
-    // }),
+    new MiniCssExtractPlugin({
+      filename: "assets/[name].css",
+    }),
     // new CleanWebpackPlugin(),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, "public")
+      directory: path.join(__dirname, "public"),
     },
     compress: true,
     port: 3006,
+    open: true,
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
 };
