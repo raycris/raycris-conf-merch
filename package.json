@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "^2.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
@@ -15,6 +24,7 @@
     "css-loader": "^6.7.1",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
     "mini-css-extract-plugin": "^2.6.0",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2",
@@ -23,7 +33,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "format": "prettier --write {*.js,src/**/*.{js,jsx}}",
+    "lint": "eslint src/ --fix"
   },
   "repository": {
     "type": "git",
@@ -34,6 +46,13 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/raycris/raycris-conf-merch/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test", 
+      "pre-push": "npm test",
+      "...": "..."
+    }
   },
   "homepage": "https://github.com/raycris/raycris-conf-merch#readme"
 }
