@@ -10,7 +10,8 @@
     "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.2",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0"
   },
   "name": "raycris-conf-merch",
   "description": "",
@@ -49,7 +50,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test", 
+      "pre-commit": "npm test",
       "pre-push": "npm test",
       "...": "..."
     }

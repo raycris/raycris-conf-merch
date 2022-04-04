@@ -17,6 +17,7 @@ module.exports = {
     alias: {
       '@styles': path.resolve(__dirname, 'src/styles/components'),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@containers': path.resolve(__dirname, 'src/containers'),
     },
   },
   mode: 'production',
@@ -61,6 +62,7 @@ module.exports = {
     compress: true,
     port: 3006,
     open: true,
+    historyApiFallback: true,
   },
   performance: {
     hints: false,
