@@ -5,6 +5,7 @@ import initialState from '../initialState';
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
 
+  // Agregar al carrito un item
   const addToCart = (payload) => {
     setState({
       ...state,
@@ -12,13 +13,22 @@ const useInitialState = () => {
     });
   };
 
+  // Remover del carrito un item
   const removeFromCart = (payload) => {
     setState({
       ...state,
       cart: state.cart.filter((items) => items.id !== payload.id),
     });
   };
-  return { addToCart, removeFromCart, state };
+
+  // Agregar datos de un comprador
+  const addToBuyer = (payload) => {
+    setState({
+      ...state,
+      buyer: [...state.buyer, payload],
+    });
+  };
+  return { addToCart, removeFromCart, state, addToBuyer };
 };
 
 export { useInitialState };
