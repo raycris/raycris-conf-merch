@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AppContext } from '@contexts/AppContext';
 
@@ -9,21 +9,23 @@ const Information = () => {
   const { state, addToBuyer } = useContext(AppContext);
   const { cart } = state;
   const form = useRef(null);
+  const navigate = useNavigate()
 
   const handleSubmit = () => {
     const formData = new FormData(form.current);
     const buyer = {
+      cp: formData.get('cp'),
       name: formData.get('name'),
-      email: formData.get('email'),
-      address: formData.get('address'),
       apto: formData.get('apto'),
       city: formData.get('city'),
-      country: formData.get('country'),
+      email: formData.get('email'),
       state: formData.get('state'),
-      cp: formData.get('cp'),
       phone: formData.get('phone'),
+      country: formData.get('country'),
+      address: formData.get('address'),
     };
     addToBuyer(buyer);
+    navigate('/checkout/payment')
   };
 
 
